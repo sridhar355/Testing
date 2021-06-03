@@ -14,6 +14,8 @@ jobs:
       - run: echo " The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
+          git checkout main
+          git pull
           git checkout -b sridhar2
           git push -u origin sridhar2
           git branch
