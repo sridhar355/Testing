@@ -1,16 +1,19 @@
 name: GitHub Actions Demo
-#pull condtion
+#pull_request condtion
 on:
   pull_request:
+    # using label
     types: [ labeled ]
 
 jobs:
   # sample-job
   Explore-GitHub-Actions:
+    # checking if the name of label is 'branch' that we assign during pull_request creation
     if: ${{ github.event.label.name == 'branch' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      # printing label name and description - description given as branch name
       - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
       - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
@@ -19,6 +22,7 @@ jobs:
       - run: echo " The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo " The workflow is now ready to test your code on the runner."
       - name: List files in the repository
+      # creating and checkout to new branch - branch name fetched from label description
         run: |
           git checkout -b ${{github.event.label.description}}
           git push -u origin ${{github.event.label.description}}
