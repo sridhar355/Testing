@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 #pull_request condtion
 on:
   pull_request:
-    # using label
+    ## using label
     types: [ labeled ]
 
 jobs:
