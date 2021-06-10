@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - main
-    types: [labeled]
+    #types: [labeled]
 
 jobs:
   # sample-job
