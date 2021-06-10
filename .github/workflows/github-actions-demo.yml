@@ -1,9 +1,11 @@
 name: GitHub Actions Demo
 #pull_request condtion
 on:
-  pull_request:
+  push:
     # using label
     types: [ labeled ]
+    branches:
+      - master
 
 jobs:
   # sample-job
