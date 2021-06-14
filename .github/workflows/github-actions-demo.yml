@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-# pull_request condtion
+#pull_request condtion
 #on:
   #pull_request:
     # using label
