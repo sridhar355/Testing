@@ -17,16 +17,6 @@ on:
 
 jobs:
   # sample-job
-  Branch-Creation-After-Merge:
-    # this job will create branch if the PR has been merged
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo PR #${{ github.event.number }} has been merged
-        git checkout -b sri-a
-        git push -u origin sri-a
-        git branch
   Explore-GitHub-Actions:
     # checking if the name of label is 'branch' that we assign during pull_request creation
     #if: ${{ github.event.label.name == 'branch' }}
@@ -46,3 +36,14 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
+  Branch-Creation:
+    # this job will only run if the PR has been merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo PR #${{ github.event.number }} has been merged
+        git checkout -b sample-a
+        git push -u origin sample-a
+        git branch
+  
