@@ -4,16 +4,29 @@ name: GitHub Actions Demo
   #pull_request:
     # using label
     #types: [ labeled ]
-on:
+#on:
   #pull_request:
     #types: [labeled]
-  push:
-    branches:
-      - main
+  #push:
+    #branches:
+      #- main
     #types: [labeled]
+on:
+  pull_request:
+    types: [ closed ]
 
 jobs:
   # sample-job
+  Branch-Creation-After-Merge:
+    # this job will create branch if the PR has been merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo PR #${{ github.event.number }} has been merged
+        git checkout -b sri-a
+        git push -u origin sri-a
+        git branch
   Explore-GitHub-Actions:
     # checking if the name of label is 'branch' that we assign during pull_request creation
     #if: ${{ github.event.label.name == 'branch' }}
@@ -31,8 +44,5 @@ jobs:
       - name: List files in the repository
       # creating and checkout to new branch - branch name fetched from label description
         run: |
-          git checkout -b ${{github.event.label.description}}
-          git push -u origin ${{github.event.label.description}}
-          git branch
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
