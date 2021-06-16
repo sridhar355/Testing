@@ -41,8 +41,11 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          git checkout -b sample-a
-          git push -u origin sample-a
+      - name: List files in the repository
+      # creating and checkout to new branch - branch name fetched from label description
+        run: |
+          git checkout -b branch2
+          git push -u origin branch2
           git branch
+          ls ${{ github.workspace }}
   
