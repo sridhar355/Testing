@@ -41,9 +41,8 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo PR #${{ github.event.number }} has been merged
-        git checkout -b sample-a
-        git push -u origin sample-a
-        git branch
+      - run: |
+          git checkout -b sample-a
+          git push -u origin sample-a
+          git branch
   
