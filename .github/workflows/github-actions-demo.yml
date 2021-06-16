@@ -43,6 +43,7 @@ jobs:
     steps:
       - name: List files in the repository
         run: |
+          git status
           git checkout -b branch2
           git push -u origin branch2
           git branch
