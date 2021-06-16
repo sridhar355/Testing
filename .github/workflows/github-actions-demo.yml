@@ -42,7 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List files in the repository
-      # creating and checkout to new branch - branch name fetched from label description
         run: |
           git checkout -b branch2
           git push -u origin branch2
