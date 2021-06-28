@@ -41,6 +41,8 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - name: checkout repository code
+        uses: actions/checkout@v2
       - name: List files in the repository
         run: |
           git status
