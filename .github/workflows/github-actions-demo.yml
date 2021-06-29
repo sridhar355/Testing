@@ -30,11 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
-      - run: echo "the commit message is ${{ github.event.head_commit.message }}."
       - name: checkout repository code
         uses: actions/checkout@v2
       - name: List files in the repository
+        env:
+          branch_name: ${{github.event.pull_request.title}}
         run: |
+          echo "branch name is $branch_name "
           git status
           git checkout -b ${{github.event.pull_request.title}}
           git push -u origin ${{github.event.pull_request.title}}
