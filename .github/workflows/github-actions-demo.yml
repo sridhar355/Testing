@@ -29,16 +29,15 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
-      - run: echo "title ${{github.event.pull_request.title}} number ${{github.event.pull_request.number}}."
+      - run: echo "title ${{github.event.pull_request.title}}."
       - run: echo "the commit message is ${{ github.event.head_commit.message }}."
       - name: checkout repository code
         uses: actions/checkout@v2
       - name: List files in the repository
         run: |
           git status
-          git checkout -b branch2
-          git push -u origin branch2
+          git checkout -b ${{github.event.pull_request.title}}
+          git push -u origin ${{github.event.pull_request.title}}
           git branch
           ls ${{ github.workspace }}
   
