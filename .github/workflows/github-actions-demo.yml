@@ -37,8 +37,7 @@ jobs:
           branch_name: ${{github.event.pull_request.title}}
         run: |
           echo "branch name is $branch_name "
-          var = "$(grep -o 'Pull Request for [^ ,]\+' <<< "$branch_name")"
-          echo "var value is $var "
+          echo $branch_name | cut -d " " -f 3
           git status
           git checkout -b ${{github.event.pull_request.title}}
           git push -u origin ${{github.event.pull_request.title}}
