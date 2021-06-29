@@ -41,6 +41,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
       - run: echo "the commit message is ${{ github.event.head_commit.message }}."
       - name: checkout repository code
         uses: actions/checkout@v2
