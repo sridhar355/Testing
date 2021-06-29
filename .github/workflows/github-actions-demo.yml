@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-# pull_request condtion
+#pull_request condtion
 #on:
   #pull_request:
     # using label
@@ -42,6 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
+      - run: echo "title ${{github.event.pull_request.title}} number ${{github.event.pull_request.number}}."
       - run: echo "the commit message is ${{ github.event.head_commit.message }}."
       - name: checkout repository code
         uses: actions/checkout@v2
