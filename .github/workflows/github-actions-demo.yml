@@ -41,8 +41,8 @@ jobs:
           branch_name=`echo $description | cut -d " " -f 3`
           echo $branch_name
           git status
-          git checkout -b ${{github.event.pull_request.title}}
-          git push -u origin ${{github.event.pull_request.title}}
+          git checkout -b $branch_name
+          git push -u origin $branch_name
           git branch
           ls ${{ github.workspace }}
   
