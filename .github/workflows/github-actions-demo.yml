@@ -35,7 +35,7 @@ jobs:
       - name: Creating branch
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
-          echo $branch_name
+          echo "creating the branch $branch_name "
           git status
           git checkout -b $branch_name
           git push -u origin $branch_name
