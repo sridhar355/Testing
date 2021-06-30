@@ -36,9 +36,11 @@ jobs:
         env:
           description: ${{github.event.pull_request.title}}
         run: |
-          echo "description is $description "
-          echo $description | cut -d " " -f 3
           branch_name=`echo $description | cut -d " " -f 3`
+          a=`echo ${{github.event.pull_request.title}} | cut -d " " -f 3`
+          echo "---"
+          echo $a
+          echo "---"
           echo $branch_name
           git status
           git checkout -b $branch_name
