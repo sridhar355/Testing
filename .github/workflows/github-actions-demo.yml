@@ -34,12 +34,12 @@ jobs:
         uses: actions/checkout@v2
       - name: List files in the repository
         env:
-          branch_name: ${{github.event.pull_request.title}}
+          description: ${{github.event.pull_request.title}}
         run: |
-          echo "branch name is $branch_name "
-          echo $branch_name | cut -d " " -f 3
-          result=$($branch_name | cut -d " " -f 3)
-          echo " result is $result "
+          echo "description is $description "
+          echo $description | cut -d " " -f 3
+          branch_name=`echo $description | cut -d " " -f 3`
+          echo $branch_name
           git status
           git checkout -b ${{github.event.pull_request.title}}
           git push -u origin ${{github.event.pull_request.title}}
