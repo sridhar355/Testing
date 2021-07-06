@@ -26,7 +26,7 @@ jobs:
       - run: echo " This job's status is ${{ job.status }}."
   Branch-Creation:
     # this job will only run if the PR has been merged
-    # if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     if: |
       github.event.pull_request.merged == true &&
       (${{github.event.pull_request.title}} == "Pull Request for"* && ${{github.event.pull_request.title}} == *"release")
