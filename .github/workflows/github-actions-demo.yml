@@ -32,11 +32,9 @@ jobs:
     env:
       title: ${{github.event.pull_request.title}} 
     if: |
-      echo "description is $title " ||
-      echo "title ${{github.event.pull_request.title}} " ||
       github.event.pull_request.merged == true &&
-      startsWith(github.event.pull_request.title, 'Pull Request for')&&
-      endsWith(github.event.pull_request.title, 'release')
+      startsWith(title, 'Pull Request for')&&
+      endsWith(title, 'release')
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
