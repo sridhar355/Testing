@@ -29,7 +29,8 @@ jobs:
     #if: github.event.pull_request.merged == true
     if: |
       github.event.pull_request.merged == true &&
-      (${{github.event.pull_request.title}} == "Pull Request for"* && ${{github.event.pull_request.title}} == *"release")
+      (${{github.event.pull_request.title}} == "Pull Request for"*) && 
+      (${{github.event.pull_request.title}} == *"release")
 
     runs-on: ubuntu-latest
     steps:
