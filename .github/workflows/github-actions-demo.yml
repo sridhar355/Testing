@@ -33,10 +33,10 @@ jobs:
      # (${{github.event.pull_request.title}} == *release)&&
      #startsWith(${{title}}, 'Pull Request for')&&
       # endsWith(${{title}}, 'release')
+      # ${{ $title == Pull Request for* }}
     if: |
       github.event.pull_request.merged == true &&
-      ${{ $title == Pull Request for* }}
-      ${{ $title == *release }}
+      contains(env.title, 'Pull Request for')
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
