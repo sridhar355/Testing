@@ -24,7 +24,26 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
-
+  Branch-Creation:
+    #this job will only run if the PR has been merged
+    #if: github.event.pull_request.merged == true
+    #(${{github.event.pull_request.title}} == Pull Request for*)&& 
+     # (${{github.event.pull_request.title}} == *release)&&
+    if: |
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.title, 'Pull Request for')&&
+      endsWith(github.event.pull_request.title, 'release')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "title ${{github.event.pull_request.title}}."
+      - name: checkout repository code
+        uses: actions/checkout@v2
+      - name: Creating branch
+        run: |
+          branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          echo "creating the branch $branch_name "
+          git pull
+          git status
           git checkout -b $branch_name
           git push -u origin $branch_name
           git branch
