@@ -28,9 +28,9 @@ jobs:
     # this job will only run if the PR has been merged
     #if: github.event.pull_request.merged == true
     if: |
-      github.event.pull_request.merged == true &&
-      (${{github.event.pull_request.title}} == "Pull Request for"*) && 
-      (${{github.event.pull_request.title}} == *"release")
+      (github.event.pull_request.merged == true) &&
+      (${{github.event.pull_request.title}} == Pull Request for*) && 
+      (${{github.event.pull_request.title}} == *release)
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
