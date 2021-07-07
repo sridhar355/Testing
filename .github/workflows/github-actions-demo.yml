@@ -35,8 +35,8 @@ jobs:
       # endsWith(${{title}}, 'release')
     if: |
       github.event.pull_request.merged == true &&
-      ${{ ${{title}} == Pull Request for* }}
-      ${{ ${{title}} == *release }}
+      ${{ $title == Pull Request for* }}
+      ${{ $title == *release }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
