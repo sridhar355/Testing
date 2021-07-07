@@ -29,6 +29,8 @@ jobs:
     #if: github.event.pull_request.merged == true
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
      # (${{github.event.pull_request.title}} == *release)&&
+    env:
+      echo "title ${{github.event.pull_request.title}} "
     if: |
       echo "title ${{github.event.pull_request.title}} " ||
       github.event.pull_request.merged == true &&
