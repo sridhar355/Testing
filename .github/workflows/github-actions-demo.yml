@@ -25,8 +25,8 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
   Branch-Creation:
-    env:
-      TITLE: ${{github.event.pull_request.title}} 
+    #env:
+     # TITLE: ${{github.event.pull_request.title}} 
     #this job will only run if the PR has been merged
     #if: github.event.pull_request.merged == true
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
@@ -34,14 +34,21 @@ jobs:
      #startsWith(${{title}}, 'Pull Request for')&&
       # endsWith(${{title}}, 'release')
       # ${{ $title == Pull Request for* }}
-      if: |
-        github.event.pull_request.merged == true
-        ${{ $TITLE == Pull Request for* }}
+      #if: |
+       # github.event.pull_request.merged == true
+       # ${{ $TITLE == Pull Request for* }}
     runs-on: ubuntu-latest
+    env:
+      TITLE: ${{github.event.pull_request.title}}
+    if: |
+      github.event.pull_request.merged == true
+      ${{ $TITLE == Pull Request for* }}
+      
     steps:
-      #- name: env variable
-       # env:
-       #   TITLE: ${{github.event.pull_request.title}}
+      - name: condition check
+       
+        #env:
+         #TITLE: ${{github.event.pull_request.title}}
       - run: echo "TITLE $TITLE "
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
