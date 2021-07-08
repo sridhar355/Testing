@@ -41,7 +41,7 @@ jobs:
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4` >> $GITHUB_ENV
           echo "hello $VERSION"
       - name: Conditionally Run
-        if: contains(env.VERSION, 'v101')
+        if: contains($VERSION, 'v101')
         run: |
           echo "lets run the job"
       - name: Creating branch
