@@ -41,10 +41,11 @@ jobs:
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4` >> $GITHUB_ENV
           echo "hello $VERSION"
       - name: Conditionally Run
-        if: contains($VERSION, 'v101')
+        if: contains(env.VERSION, 'v101')
         run: |
           echo "lets run the job"
       - name: Creating branch
+        if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') }}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           echo "creating the branch $branch_name "
