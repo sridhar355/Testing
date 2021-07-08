@@ -39,6 +39,8 @@ jobs:
       - name: set env variable
         run: |
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4` >> $GITHUB_ENV
+          echo "$VERSION"
+          echo "$GITHUB_ENV"
       - name: Conditionally Run
         if: contains(env.VERESION, 'v1011')
         run: |
