@@ -34,15 +34,15 @@ jobs:
      #startsWith(${{title}}, 'Pull Request for')&&
       # endsWith(${{title}}, 'release')
       # ${{ $title == Pull Request for* }}
+      if: |
+        github.event.pull_request.merged == true
+        ${{ $TITLE == Pull Request for* }}
     runs-on: ubuntu-latest
     steps:
       #- name: env variable
        # env:
        #   TITLE: ${{github.event.pull_request.title}}
-      - name: checking condition
-        if: |
-          github.event.pull_request.merged == true
-          ${{ $TITLE == Pull Request for* }}
+      - run: echo "TITLE $TITLE "
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
         uses: actions/checkout@v2
