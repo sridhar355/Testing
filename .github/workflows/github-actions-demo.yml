@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v2
       - name: set env variable
         run: |
-          echo "VERSION=${{github.event.pull_request.title}} | cut -d " " -f 4 >> $GITHUB_ENV
+          echo "VERSION=${{github.event.pull_request.title}} | cut -d " " -f 4" >> $GITHUB_ENV
       - name: Conditionally Run
         if: contains(env.VERESION, 'v1010')
         run: |
