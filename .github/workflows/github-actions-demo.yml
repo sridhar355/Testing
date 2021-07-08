@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "version is $VERSION
+      - run: echo "version is $VERSION"
       # printing label name and description - description given as branch name
       - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
       - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
