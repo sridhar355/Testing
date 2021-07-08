@@ -30,12 +30,13 @@ jobs:
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
      # (${{github.event.pull_request.title}} == *release)&&
      #startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')
-    if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') && contains(github.event.pull_request.title, 'release')}}
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
         uses: actions/checkout@v2
+      - run: echo "::set-env name=TITLE::${{github.event.pull_request.title}}"
       - name: Creating branch
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
@@ -45,3 +46,4 @@ jobs:
           git checkout -b $branch_name
           git push -u origin $branch_name
           git branch
+        if: env.TITLE == Pull Request for*
