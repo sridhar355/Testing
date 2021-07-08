@@ -2,8 +2,6 @@ name: GitHub Actions Demo
 on:
   pull_request:
     types: [closed]
-env:
-  VERSION: ${`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`}
 
 jobs:
   # sample-job
@@ -13,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "version is $VERSION"
       # printing label name and description - description given as branch name
       - run: echo "The job was triggered with label ${{github.event.label.name}} and description ${{github.event.label.description}}."
       - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -37,15 +34,9 @@ jobs:
      #startsWith(${{title}}, 'Pull Request for')&&
       # endsWith(${{title}}, 'release')
       # ${{ $title == Pull Request for* }}
-    if: github.event.pull_request.merged == true
-
-       
+    if: github.event.pull_request.merged == true  
     runs-on: ubuntu-latest
-      
     steps:
-      - name: condition check
-      - run: echo "::set-env name=TITLE::$( github.event.pull_request.title )"
-      - run: echo "TITLE $TITLE "
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
         uses: actions/checkout@v2
