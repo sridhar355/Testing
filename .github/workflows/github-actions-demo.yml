@@ -25,16 +25,14 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
   Branch-Creation:
-    #env:
-     # TITLE: ${{github.event.pull_request.title}} 
     #this job will only run if the PR has been merged
     #if: github.event.pull_request.merged == true
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
      # (${{github.event.pull_request.title}} == *release)&&
-     #startsWith(${{title}}, 'Pull Request for')&&
-      # endsWith(${{title}}, 'release')
-      # ${{ $title == Pull Request for* }}
-    if: github.event.pull_request.merged == true  
+    if: |
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.title, 'Pull Request for')&&
+      endsWith(github.event.pull_request.title, 'release')
     runs-on: ubuntu-latest
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
@@ -49,4 +47,3 @@ jobs:
           git checkout -b $branch_name
           git push -u origin $branch_name
           git branch
-  
