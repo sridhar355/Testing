@@ -2,6 +2,8 @@ name: GitHub Actions Demo
 on:
   pull_request:
     types: [closed]
+env:
+  VERSION:`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
 
 jobs:
   # sample-job
@@ -38,17 +40,15 @@ jobs:
        # github.event.pull_request.merged == true
        # ${{ $TITLE == Pull Request for* }}
     runs-on: ubuntu-latest
-    env:
-      TITLE: ${{github.event.pull_request.title}}
-    if: |
-      github.event.pull_request.merged == true
-      ${{ $TITLE == Pull Request for* }}
+    #env:
+      #TITLE: ${{github.event.pull_request.title}}
+    #if: |
+    #  github.event.pull_request.merged == true
+     # ${{ $TITLE == Pull Request for* }}
       
     steps:
       - name: condition check
-       
-        #env:
-         #TITLE: ${{github.event.pull_request.title}}
+      - run: echo "::set-env name=TITLE::$( github.event.pull_request.title )"
       - run: echo "TITLE $TITLE "
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
@@ -62,4 +62,7 @@ jobs:
           git checkout -b $branch_name
           git push -u origin $branch_name
           git branch
+        if: |
+          github.event.pull_request.merged == true
+          env.TITLE == 'Pull Request for'*
   
