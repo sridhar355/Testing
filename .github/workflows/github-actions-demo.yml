@@ -38,18 +38,18 @@ jobs:
         uses: actions/checkout@v2
       - name: set env variable
         run: |
-          Desc=`echo ${{github.event.pull_request.title}}`
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $VERSION tools release"
+          echo "description $desc"
+          echo "${{github.event.pull_request.title}}"
           echo "TITLE=$(VERSION)" >> $GITHUB_ENV
-          echo "hello $VERSION"
-          echo "hola $Desc"
       - name: Conditionally Run
         if: contains(env.TITLE, 'v1023')
         run: |
           echo "lets run the job"
       - name: Creating branch
-        if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
-        #if: ${{ '$Desc' == Pull Request for* }}
+        #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
+        if: ${{ github.event.pull_request.title == '$desc' }}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           echo "creating the branch $branch_name "
