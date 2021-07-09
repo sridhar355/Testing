@@ -50,6 +50,12 @@ jobs:
       - name: Creating branch
         if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
         #if: ${{ github.event.pull_request.title == '$desc' }}
+      - name: conditon
+        run: |
+          branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $branch_name tools release"
+          echo "::set-env name=CHECK_DESC::$desc"
+      - name: if
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $branch_name tools release"
@@ -60,3 +66,4 @@ jobs:
           git checkout -b $branch_name
           git push -u origin $branch_name
           git branch
+        if: env.CHECK_DESC == '${{github.event.pull_request.title}}'
