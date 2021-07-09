@@ -42,7 +42,6 @@ jobs:
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           echo "TITLE=$(VERSION)" >> $GITHUB_ENV
           echo "hello $VERSION"
-          echo "$Desc"
       - name: Conditionally Run
         if: contains(env.TITLE, 'v1023')
         run: |
