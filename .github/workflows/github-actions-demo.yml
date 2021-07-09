@@ -52,6 +52,7 @@ jobs:
         #if: ${{ github.event.pull_request.title == '$desc' }}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $branch_name tools release"
           echo "the desc is $desc"
           echo "creating the branch $branch_name "
           git pull
