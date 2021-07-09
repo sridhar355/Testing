@@ -43,12 +43,12 @@ jobs:
           echo "TITLE=$(VERSION)" >> $GITHUB_ENV
           echo "hello $VERSION $Desc"
       - name: Conditionally Run
-        if: contains(env.TITLE, 'v1022')
+        if: contains(env.TITLE, 'v1023')
         run: |
           echo "lets run the job"
       - name: Creating branch
-        #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
-        if: ${{ }}
+        if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
+        #if: ${{ }}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           echo "creating the branch $branch_name "
