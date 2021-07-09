@@ -49,7 +49,7 @@ jobs:
           echo "lets run the job"
       - name: Creating branch
         #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
-        if: github.event.pull_request.title == </font>'$desc'</font>
+        if: ${{github.event.pull_request.title == $'desc'}}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $branch_name tools release"
