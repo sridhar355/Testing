@@ -55,7 +55,9 @@ jobs:
         #  desc="Pull Request for $VERSION tools release"
         #  echo "description $desc"
       - name: version env
-        run: echo ::set-env name=version::"${github.event.pull_request.title}" | cut -d " " -f 4
+        run: |
+          echo ::set-env name=version::"${github.event.pull_request.title}" | cut -d " " -f 4
+          echo "the version is $version"
       - name: description env
         run: |
           echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
