@@ -57,7 +57,7 @@ jobs:
       - name: version env
         run: echo ::set-env name=version::"${github.event.pull_request.title}" | cut -d " " -f 4
       - name: description env
-        run: echo ::set-env name=desc::Pull Request for "${version}" tools release
+        run: echo ::set-env name=desc::Pull Request for "${env.version}" tools release
       - name: condition checking
         if: ${{ github.event.pull_request.title == env.desc}}
         run: |
