@@ -59,7 +59,7 @@ jobs:
           echo ::set-env name=version::"${github.event.pull_request.title}" | cut -d " " -f 4
           echo "the version is $version"
       - name: condition checking
-        if: ${{github.event.pull_request.title == "Pull Reqest for v510 tools release"}}
+        if: ${{github.event.pull_request.title=='Pull Reqest for v510 tools release'}}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $branch_name tools release"
