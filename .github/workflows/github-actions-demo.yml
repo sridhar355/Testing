@@ -59,7 +59,7 @@ jobs:
       - name: description env
         run: |
           echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-          echo ::set-env name=desc::Pull Request for "${{env.version}}" tools release
+          echo ::set-env name=desc::Pull Request for "${env.version}" tools release
           echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
       - name: condition checking
         if: ${{ github.event.pull_request.title == env.desc}}
