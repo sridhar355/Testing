@@ -46,7 +46,8 @@ jobs:
       - name: env variable 
         env:
           VERSION: echo ${{github.event.pull_request.title}} | cut -d " " -f 4
-          desc: Pull Request for $VERSION tools release
+          desc: "::set-env name=VERSION::desc: Pull Request for $VERSION tools release"
+         # desc: Pull Request for $VERSION tools release
       - name: Creating branch
         #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
         if: ${{github.event.pull_request.title == env.desc}}
