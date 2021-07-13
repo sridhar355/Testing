@@ -32,6 +32,7 @@ jobs:
      #startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')
     if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') && contains(github.event.pull_request.title, 'release')}}
     runs-on: ubuntu-latest
+    
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
@@ -42,14 +43,13 @@ jobs:
           desc="Pull Request for $VERSION tools release"
           echo "description $desc"
           echo "${{github.event.pull_request.title}}"
-          echo "TITLE=$(VERSION)" >> $GITHUB_ENV
-      - name: Conditionally Run
-        if: contains(env.TITLE, 'v1023')
-        run: |
-          echo "lets run the job"
+      - name: env variable 
+        env:
+          VERSION: echo ${{github.event.pull_request.title}} | cut -d " " -f 4
+          desc: Pull Request for $VERSION tools release
       - name: Creating branch
         #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
-        if: ${{github.event.pull_request.title == $'desc'}}
+        if: ${{github.event.pull_request.title == env.desc}}
         run: |
           branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $branch_name tools release"
