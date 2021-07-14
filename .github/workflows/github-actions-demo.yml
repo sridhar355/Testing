@@ -57,7 +57,7 @@ jobs:
       - name: version env
         run: |
           echo '$desc'
-          echo '$github.event.pull_request.title'
+          echo "${{github.event.pull_request.title}}"
       - name: condition checking
         if: ${{ github.event.pull_request.title == '$desc'}}
         run: |
