@@ -59,14 +59,26 @@ jobs:
           echo '$desc'
           echo "${{github.event.pull_request.title}}"
       - name: condition checking
-        if: ${{ github.event.pull_request.title == '$desc'}}
         run: |
-          branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
-          desc="Pull Request for $branch_name tools release"
-          echo "the desc is $desc"
-          echo "creating the branch $branch_name "
-          git pull
-          git status
-          git checkout -b $branch_name
-          git push -u origin $branch_name
-          git branch
+          VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $VERSION tools release"
+          echo "description $desc"
+          echo "${{github.event.pull_request.title}}"
+          if [[ "${{ github.event.pull_request.title }}" == "$desc" ]]; then
+            git pull
+            git status
+            git checkout -b $VERSION
+            git push -u origin $VERSION
+            git branch
+          fi
+       # if: ${{ github.event.pull_request.title == }}
+       # run: |
+        #  branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+         # desc="Pull Request for $branch_name tools release"
+          #echo "the desc is $desc"
+          #echo "creating the branch $branch_name "
+       #   git pull
+        #  git status
+         # git checkout -b $branch_name
+          #git push -u origin $branch_name
+          #git branch
