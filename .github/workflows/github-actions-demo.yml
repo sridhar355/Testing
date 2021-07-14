@@ -30,7 +30,7 @@ jobs:
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
      # (${{github.event.pull_request.title}} == *release)&&
      #startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')
-    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') && contains(github.event.pull_request.title, 'release')}}
+    #if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') && contains(github.event.pull_request.title, 'release')}}
     runs-on: ubuntu-latest
     
     steps:
