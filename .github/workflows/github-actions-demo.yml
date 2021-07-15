@@ -75,6 +75,8 @@ jobs:
             git branch
           elif [ "${{ github.event.pull_request.title }}" == "$desc" ];
           then
+            git config --global user.email "sridhar.meesala2000@gmail.com"
+            git config --global user.name "sridhar355"
             git pull
             git checkout $VERSION
             git pull origin main --allow-unrelated-histories
