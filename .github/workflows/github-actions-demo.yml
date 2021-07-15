@@ -62,7 +62,7 @@ jobs:
         run: |
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $VERSION tools release"
-          local existed=$(git branch --list ${VERSION})
+          existed=$(git branch --list ${VERSION})
           echo "$VERSION"
           echo "$desc"
           echo "${{github.event.pull_request.title}}"
