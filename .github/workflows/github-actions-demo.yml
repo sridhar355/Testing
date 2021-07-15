@@ -78,7 +78,7 @@ jobs:
             git pull
             git checkout $VERSION
             git fetch origin
-            Git pull origin main –allow-unrelated-histories
+            Git pull main $VERSION –allow-unrelated-histories
             
           else
             echo "No Branch creation"
