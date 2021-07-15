@@ -6,7 +6,7 @@ on:
 jobs:
   # sample-job
   Explore-GitHub-Actions:
-    # checking if the name of label is 'branch' that we assign during pull_request creation
+    #checking if the name of label is 'branch' that we assign during pull_request creation
     # if: ${{ github.event.label.name == 'branch' }}
     runs-on: ubuntu-latest
     steps:
