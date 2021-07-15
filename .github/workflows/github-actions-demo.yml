@@ -62,9 +62,11 @@ jobs:
         run: |
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $VERSION tools release"
-          a=`git rev-parse --verify --quiet {VERSION}`
           existed=$(git branch --list ${VERSION})
-          echo "$a"
+          exists=`git show-ref refs/heads/${VERSION}`
+          if [ -n "$exists" ]; then
+            echo 'branch exists!'
+          fi
           echo "$VERSION"
           echo "$desc"
           echo "${{github.event.pull_request.title}}"
