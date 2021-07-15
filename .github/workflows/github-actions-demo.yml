@@ -67,7 +67,8 @@ jobs:
           echo "$desc"
           echo "${{github.event.pull_request.title}}"
           echo "$existed"
-          if [ "${{ github.event.pull_request.title }}" == "$desc" ] && [ -z ${existed} ]; then
+          if [ "${{ github.event.pull_request.title }}" == "$desc" ] && [ -z ${existed} ]; 
+          then
             git pull
             git status
             git checkout -b $VERSION
