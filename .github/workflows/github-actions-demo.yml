@@ -73,9 +73,12 @@ jobs:
             git checkout -b $VERSION
             git push -u origin $VERSION
             git branch
-          else
+          elif [ "${{ github.event.pull_request.title }}" == "$desc" ];
+          then
             git pull
             git checkout $VERSION
+          else
+            echo "No Branch creation"
           fi
        # if: ${{ github.event.pull_request.title == }}
        # run: |
