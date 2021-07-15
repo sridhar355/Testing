@@ -77,7 +77,8 @@ jobs:
           then
             git pull
             git checkout $VERSION
-            git pull origin main
+            git pull origin
+            
           else
             echo "No Branch creation"
           fi
