@@ -75,8 +75,8 @@ jobs:
             git push -u origin $VERSION
             git branch
           else
-            git checkout $VERSION
             git pull
+            git checkout $VERSION
           fi
        # if: ${{ github.event.pull_request.title == }}
        # run: |
