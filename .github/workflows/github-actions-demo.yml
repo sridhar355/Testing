@@ -78,7 +78,7 @@ jobs:
             git pull
             git checkout $VERSION
             git fetch origin
-            Git pull origin $VERSION
+            Git pull $VERSION origin
             
           else
             echo "No Branch creation"
