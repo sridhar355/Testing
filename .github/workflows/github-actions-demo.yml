@@ -63,8 +63,9 @@ jobs:
           VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
           desc="Pull Request for $VERSION tools release"
           existed=$(git branch --list ${VERSION})
-          echo "description $desc"
+          echo "$desc"
           echo "${{github.event.pull_request.title}}"
+          echo "$existed"
           if [[ "${{ github.event.pull_request.title }}" == "$desc" -a -z ${existed} ]]; then
             git pull
             git status
