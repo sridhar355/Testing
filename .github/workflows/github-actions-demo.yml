@@ -83,6 +83,7 @@ jobs:
             git checkout $VERSION
             git rebase --abort 
             git pull origin main --allow-unrelated-histories
+            git push origin $VERSION
             
           else
             echo "No Branch creation"
