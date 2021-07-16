@@ -82,8 +82,6 @@ jobs:
             git branch
           elif [ "${{ github.event.pull_request.title }}" == "$desc" ];
           then
-            git config user.email github-actions@github.com
-            git config user.name github-actions
             git config pull.rebase true
             git pull
             git checkout $VERSION
