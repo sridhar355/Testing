@@ -83,6 +83,7 @@ jobs:
             git checkout $VERSION
             git add/rm README.md
             git rebase --continue
+            git rebase --abort 
             git pull origin main --allow-unrelated-histories
             
           else
