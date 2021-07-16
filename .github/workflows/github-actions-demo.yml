@@ -81,6 +81,8 @@ jobs:
             git config pull.rebase true
             git pull
             git checkout $VERSION
+            git add .
+            git rebase --continue
             git pull origin main --allow-unrelated-histories
             
           else
