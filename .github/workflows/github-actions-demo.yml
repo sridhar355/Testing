@@ -25,12 +25,6 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo " This job's status is ${{ job.status }}."
-      - name: git command checking
-        run: |
-          var=$(git config user.email github-actions@github.com 2>&1)
-          var1=$(git config user.name github-actions 2>&1)
-          echo "$var"
-          echo "$var1"
   Branch-Creation:
     #this job will only run if the PR has been merged
     #if: github.event.pull_request.merged == true
@@ -82,6 +76,8 @@ jobs:
             git branch
           elif [ "${{ github.event.pull_request.title }}" == "$desc" ];
           then
+            git config --global user.email "sridhar.meesala2000@gmail.com"
+            git config --global user.name "${{ github.actor }}"
             git config pull.rebase true
             git pull
             git checkout $VERSION
