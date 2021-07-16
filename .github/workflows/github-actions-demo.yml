@@ -29,23 +29,70 @@ jobs:
     #if: github.event.pull_request.merged == true
     #(${{github.event.pull_request.title}} == Pull Request for*)&& 
      # (${{github.event.pull_request.title}} == *release)&&
-    if: |
-      github.event.pull_request.merged == true &&
-      startsWith(github.event.pull_request.title, 'Pull Request for')&&
-      endsWith(github.event.pull_request.title, 'release')
+     #startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')
+    #if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'Pull Request for') && contains(github.event.pull_request.title, 'release') && contains(github.event.pull_request.title, 'release')}}
     runs-on: ubuntu-latest
+    
     steps:
       - run: echo "title ${{github.event.pull_request.title}}."
       - name: checkout repository code
         uses: actions/checkout@v2
-      - name: Creating branch
+      - name: set env variable
         run: |
-          branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
-          echo "creating the branch $branch_name "
-          git pull
-          git status
-          git checkout -b $branch_name
-          git push -u origin $branch_name
-          git branch
-  
-#testing
+          VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $VERSION tools release"
+          echo "description $desc"
+          echo "${{github.event.pull_request.title}}"
+      #- name: env variable 
+        #env:
+         # VERSION: echo "${{github.event.pull_request.title}}" | cut -d " " -f 4
+         # desc: "::set-env name=VERSION::desc: "${{Pull Request for $VERSION tools release}}" |
+         # desc: Pull Request for $VERSION tools release
+      #- name: Creating branch
+        #if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Pull Request for') && endsWith(github.event.pull_request.title, 'release')}}
+        #run: |
+        #  VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+        #  desc="Pull Request for $VERSION tools release"
+        #  echo "description $desc"
+      - name: version env
+        run: |
+          echo '$desc'
+          echo "${{github.event.pull_request.title}}"
+      - name: condition checking
+        run: |
+          VERSION=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+          desc="Pull Request for $VERSION tools release"
+          existed=$(git ls-remote --heads origin ${VERSION})
+          echo "$VERSION"
+          echo "$desc"
+          echo "${{github.event.pull_request.title}}"
+          if [ "${{ github.event.pull_request.title }}" == "$desc" ] && [ -z ${existed} ]; 
+          then
+            git pull
+            git status
+            git checkout -b $VERSION
+            git push -u origin $VERSION
+            git branch
+          elif [ "${{ github.event.pull_request.title }}" == "$desc" ];
+          then
+            git config --global user.email "sridhar.meesala2000@gmail.com"
+            git config --global user.name "sridhar355"
+            git config pull.rebase false 
+            git pull
+            git checkout $VERSION
+            git pull origin main --allow-unrelated-histories
+            
+          else
+            echo "No Branch creation"
+          fi
+       # if: ${{ github.event.pull_request.title == }}
+       # run: |
+        #  branch_name=`echo ${{github.event.pull_request.title}} | cut -d " " -f 4`
+         # desc="Pull Request for $branch_name tools release"
+          #echo "the desc is $desc"
+          #echo "creating the branch $branch_name "
+       #   git pull
+        #  git status
+         # git checkout -b $branch_name
+          #git push -u origin $branch_name
+          #git branch
