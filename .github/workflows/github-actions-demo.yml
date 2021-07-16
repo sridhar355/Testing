@@ -81,7 +81,7 @@ jobs:
             git config pull.rebase true
             git pull
             git checkout $VERSION
-            git rm README.md
+            git add/rm README.md
             git rebase --continue
             git pull origin main --allow-unrelated-histories
             
